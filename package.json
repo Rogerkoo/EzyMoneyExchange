@@ -1,27 +1,52 @@
 {
 
   "name": "EzyMoneyExchange",
+
   "type": "module",
+
   "version": "0.1.0",
+
   "private": true,
+
   "scripts": {
+
     "dev": "astro dev",
+
     "build": "astro build",
+
     "preview": "astro preview",
+
     "check": "astro check"
+
   },
+
   "dependencies": {
-    "@astrojs/vercel": "^11.0.13",
+
+    "@astrojs/vercel": "^11.0.12",
+
     "astro": "^7.3.8"
+
   },
+
   "devDependencies": {
+
     "@astrojs/check": "^0.9.4",
+
     "typescript": "^5.8.3"
+
   },
+
   "overrides": {
+
     "path-to-regexp": "^6.3.0"
+
   },
+
   "engines": {
+
     "node": "24.x"
+
   }
+
 }
+
