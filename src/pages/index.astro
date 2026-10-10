@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { currencies } from "../data/currencies";
+---
+
+<BaseLayout
+  title="EzyMoneyExchange - Currency Converter | USD to MYR"
+  description="Convert currencies with live exchange rates, quick amount presets, and saved favourites."
+>
+  <main class="page-shell">
+    <header class="site-header">
+      <a
+        class="brand"
+        href="/"
+        aria-label="EzyMoneyExchange - Currency Converter home"
+      >
+        <span class="brand-mark" aria-hidden="true">↔</span>
+        <span>EzyMoneyExchange - Currency Converter</span>
+      </a>
+      <span class="header-note">Simple. Clear. Useful.</span>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">YOUR EVERYDAY CURRENCY TOOL</p>
+      <h1 id="page-title">
+        Money across borders.<br /><span>Made simpler.</span>
+      </h1>
+      <p class="hero-copy">
+        Convert an amount, compare currencies, and keep your frequently used
+        destinations close at hand.
+      </p>
+    </section>
+
+    <section class="converter-card" aria-labelledby="converter-heading">
+      <div class="card-heading">
+        <div>
+          <p class="eyebrow">CURRENCY CONVERTER</p>
+          <h2 id="converter-heading">How much would you like to convert?</h2>
+        </div>
+        <span class="status-pill" id="rate-status-pill"
+          ><span class="status-dot" aria-hidden="true"></span><span
+            id="rate-status-label">Loading rates</span
+          ></span
+        >
+      </div>
+
+      <div class="amount-block">
+        <label class="field-label" for="amount">Amount</label>
+        <input
+          id="amount"
+          class="amount-input"
+          type="number"
+          min="0"
+          step="any"
+          value="1"
+          inputmode="decimal"
+          autocomplete="off"
+          aria-describedby="amount-help"
+        />
+        <p class="field-help" id="amount-help">
+          Choose a quick amount or enter your own.
+        </p>
+        <div class="preset-row" aria-label="Quick amount presets">
+          <button class="preset-button" type="button" data-amount="1">1</button>
+          <button class="preset-button" type="button" data-amount="1000"
+            >1,000</button
+          >
+          <button class="preset-button" type="button" data-amount="1000000"
+            >1,000,000</button
+          >
+        </div>
+      </div>
+
+      <div class="currency-row">
+        <div class="currency-field">
+          <label class="field-label" for="from-currency">From</label>
+          <select id="from-currency" class="currency-select">
+            {
+              currencies.map((currency) => (
+                <option
+                  value={currency.code}
+                  selected={currency.code === "USD"}
+                >
+                  {currency.flag} {currency.code} — {currency.name}
+                </option>
+              ))
+            }
+          </select>
+        </div>
+        <button
+          id="swap-currencies"
+          class="swap-button"
+          type="button"
+          aria-label="Swap source and target currencies"
+          title="Swap currencies">⇄</button
+        >
+        <div class="currency-field">
+          <label class="field-label" for="to-currency">To</label>
+          <select id="to-currency" class="currency-select">
+            {
+              currencies.map((currency) => (
+                <option
+                  value={currency.code}
+                  selected={currency.code === "MYR"}
+                >
+                  {currency.flag} {currency.code} — {currency.name}
+                </option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
+
+      <section class="result-panel" aria-labelledby="result-label">
+        <div class="result-copy">
+          <p class="field-label" id="result-label">Converted amount</p>
+          <p class="result-value" id="converted-amount" aria-live="polite">—</p>
+          <p class="rate-line" id="rate-line">Waiting for exchange rates…</p>
+        </div>
+        <span class="result-symbol" aria-hidden="true">↗</span>
+      </section>
+
+      <p
+        class="status-message"
+        id="status-message"
+        role="status"
+        aria-live="polite"
+      >
+        Retrieving the latest available exchange rates…
+      </p>
+
+      <section class="favourites-section" aria-labelledby="favourites-heading">
+        <div class="favourites-heading-row">
+          <div>
+            <h3 id="favourites-heading">Favourite currencies</h3>
+            <p class="section-copy">
+              Save up to 10 currencies for quick access.
+            </p>
+          </div>
+          <button class="text-button" id="toggle-favourite" type="button"
+            >☆ Add target</button
+          >
+        </div>
+        <div class="favourite-list" id="favourite-list">
+          <span class="empty-favourites"
+            >Your saved currencies will appear here.</span
+          >
+        </div>
+      </section>
+
+      <div class="rate-footnote" id="rate-updated">
+        Exchange-rate update time will appear here.
+      </div>
+    </section>
+
+    <section class="feature-grid" aria-label="Features">
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">⇄</span>
+        <h3>Convert both ways</h3>
+        <p>Swap your source and target currencies with one tap.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">☆</span>
+        <h3>Keep favourites close</h3>
+        <p>Save frequently used currencies on this device.</p>
+      </article>
+      <article class="feature-card">
+        <span class="feature-icon" aria-hidden="true">↗</span>
+        <h3>Try common amounts</h3>
+        <p>Quickly switch between 1, 1,000 and 1,000,000.</p>
+      </article>
+    </section>
+
+    <footer class="site-footer">
+      <span>Built with Astro, TypeScript and vanilla JavaScript.</span>
+      <span
+        >Rates are indicative and may differ from rates offered by banks or
+        providers.</span
+      >
+    </footer>
+  </main>
+</BaseLayout>
+
+<script src="../scripts/converter.ts"></script>
