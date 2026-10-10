@@ -20,5 +20,8 @@
   },
   "overrides": {
     "path-to-regexp": "^6.3.0"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
